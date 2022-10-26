@@ -6,7 +6,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import pl.flathumor.vehicleum.shared.SortMapping;
 import pl.flathumor.vehicleum.shared.SortMappings;
-import pl.flathumor.vehicleum.shared.VehicleumEntity;
 
 import java.util.UUID;
 

@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pl.flathumor.vehicleum.shared.SortMapping;
+import pl.flathumor.vehicleum.shared.SortMappings;
 
 import java.util.UUID;
 
@@ -19,6 +21,10 @@ public class DriverVehicleAssignationController {
   private final DriverVehicleAssignationService driverVehicleAssignationService;
 
   @GetMapping
+  @SortMappings({
+      @SortMapping(from = "driver", to = "driver.name"),
+      @SortMapping(from = "vehicle", to = "vehicle.plate")
+  })
   public AssignationGridDto getPaged(
       @RequestParam(required = false) final String search,
       @PageableDefault(sort = "id", direction = DESC) final Pageable pageable

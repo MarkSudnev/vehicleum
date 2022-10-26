@@ -31,7 +31,10 @@ public class DriverVehicleAssignationService {
   @Transactional(readOnly = true)
   public AssignationGridDto getPaged(final String search, final Pageable pageable) {
     final var assignationsPage = driverVehicleAssignationRepository
-        .findAll(where(driverNameLike(search).or(vehiclePlateLike(search))), pageable)
+        .findAll(
+            where(driverNameLike(search).or(vehiclePlateLike(search))),
+            pageable,
+            fromAttributePaths(FETCH, "driver", "vehicle"))
         .map(driverVehicleAssignationMapper::entityToListDto);
 
     return AssignationGridDto.builder()
