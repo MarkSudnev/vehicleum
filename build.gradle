@@ -1,0 +1,61 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.4'
+	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id 'java'
+}
+
+group = 'pl.flathumor'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('testcontainersVersion', "1.17.4")
+}
+
+compileJava {
+	options.compilerArgs = [
+			'-Amapstruct.defaultComponentModel=spring',
+			'-Amapstruct.unmappedTargetPolicy=IGNORE',
+	]
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.cosium.spring.data:spring-data-jpa-entity-graph:2.5.0'
+	implementation 'org.liquibase:liquibase-core:4.7.0'
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+//	implementation 'org.hibernate.orm:hibernate-jpamodelgen:6.1.2.Final'
+
+	compileOnly 'org.projectlombok:lombok'
+//	compileOnly 'org.hibernate:hibernate-jpamodelgen:6.1.2.Final'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

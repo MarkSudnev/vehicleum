@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - include:
+      file: create-tables.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: drivers.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: vehicles.sql
+      relativeToChangelogFile: true
