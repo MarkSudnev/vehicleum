@@ -14,5 +14,5 @@ public interface VehicleMapper {
   @Mapping(target = "year", source = "year")
   @Mapping(target = "plate", source = "plate")
   @Mapping(target = "vehicleState", source = "vehicleState")
-  VehicleDto entityToDto(final VehicleEntity entity);
+  VehicleDetailDto entityToDetailDto(final VehicleEntity entity);
 }

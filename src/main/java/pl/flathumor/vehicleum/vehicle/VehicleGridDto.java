@@ -9,6 +9,6 @@ import java.util.Collection;
 @Builder
 public class VehicleGridDto {
 
-  Collection<VehicleDto> items;
+  Collection<VehicleDetailDto> items;
   Long total;
 }

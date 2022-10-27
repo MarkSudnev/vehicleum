@@ -9,7 +9,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;

@@ -3,16 +3,14 @@ package pl.flathumor.vehicleum.vehicle;
 import lombok.Builder;
 import lombok.Value;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Value
 @Builder
-public class VehicleDto {
-
+public class VehicleUpdateStateDto {
   UUID id;
-  String brand;
-  String model;
-  Integer year;
-  String plate;
-  VehicleState vehicleState;
+
+  @NotNull
+  VehicleState state;
 }

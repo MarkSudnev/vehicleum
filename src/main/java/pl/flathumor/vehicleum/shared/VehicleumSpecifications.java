@@ -5,9 +5,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.UUID;
 
-import static pl.flathumor.vehicleum.shared.VehicleumEntity_.ID;
 import static pl.flathumor.vehicleum.shared.VehicleumAuditableEntity_.STATUS;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.ACTIVE;
+import static pl.flathumor.vehicleum.shared.VehicleumEntity_.ID;
 
 @UtilityClass
 public class VehicleumSpecifications {
