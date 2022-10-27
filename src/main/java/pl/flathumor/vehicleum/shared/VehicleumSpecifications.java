@@ -5,6 +5,8 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.UUID;
 
+import static pl.flathumor.vehicleum.shared.VehicleumEntity_.ID;
+import static pl.flathumor.vehicleum.shared.VehicleumAuditableEntity_.STATUS;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.ACTIVE;
 
 @UtilityClass
@@ -21,7 +23,7 @@ public class VehicleumSpecifications {
   }
 
   public static <T, V> Specification<T> relatedFieldIdIs(final String fieldName, final V value) {
-    return (root, query, cb) -> value != null ? cb.equal(root.get(fieldName).get("id"), value) : null;
+    return (root, query, cb) -> value != null ? cb.equal(root.get(fieldName).get(ID), value) : null;
   }
 
   public static <T> Specification<T> relatedFieldLike(
@@ -35,11 +37,11 @@ public class VehicleumSpecifications {
   }
 
   public static <T extends VehicleumEntity> Specification<T> statusIs(final VehicleumEntityStatus status) {
-    return (root, query, cb) -> status != null ? cb.equal(root.get("status"), status) : null;
+    return (root, query, cb) -> status != null ? cb.equal(root.get(STATUS), status) : null;
   }
 
   public static <T extends VehicleumEntity> Specification<T> idIs(final UUID id) {
-    return (root, query, cb) -> id != null ? cb.equal(root.get("id"), id) : null;
+    return (root, query, cb) -> id != null ? cb.equal(root.get(ID), id) : null;
   }
 
   public static <T extends VehicleumEntity> Specification<T> activeEntityIdIs(final UUID id) {

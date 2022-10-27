@@ -3,7 +3,6 @@ package pl.flathumor.vehicleum.drivervehicleassignation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
-import lombok.experimental.SuperBuilder;
 import pl.flathumor.vehicleum.shared.validation.NullOrNotBlank;
 
 import javax.validation.constraints.NotNull;

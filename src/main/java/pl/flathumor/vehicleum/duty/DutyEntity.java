@@ -7,8 +7,12 @@ import lombok.experimental.SuperBuilder;
 import pl.flathumor.vehicleum.driver.DriverEntity;
 import pl.flathumor.vehicleum.shared.VehicleumEntity;
 
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 import static javax.persistence.CascadeType.ALL;

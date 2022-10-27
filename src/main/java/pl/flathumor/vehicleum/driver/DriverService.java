@@ -10,9 +10,12 @@ import pl.flathumor.vehicleum.shared.NoResourceFoundException;
 import java.util.UUID;
 
 import static org.springframework.data.jpa.domain.Specification.where;
-import static pl.flathumor.vehicleum.driver.DriverSpecifications.*;
+import static pl.flathumor.vehicleum.driver.DriverSpecifications.emailLike;
+import static pl.flathumor.vehicleum.driver.DriverSpecifications.nameLike;
+import static pl.flathumor.vehicleum.driver.DriverSpecifications.phoneLike;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.ACTIVE;
-import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.*;
+import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.activeEntityIdIs;
+import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.statusIs;
 
 @Service
 @RequiredArgsConstructor

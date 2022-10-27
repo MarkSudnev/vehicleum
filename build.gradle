@@ -37,15 +37,15 @@ dependencies {
 	implementation 'org.liquibase:liquibase-core:4.7.0'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
-//	implementation 'org.hibernate.orm:hibernate-jpamodelgen:6.1.2.Final'
 
 	compileOnly 'org.projectlombok:lombok'
-//	compileOnly 'org.hibernate:hibernate-jpamodelgen:6.1.2.Final'
+	compileOnly 'org.hibernate:hibernate-jpamodelgen'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
 }

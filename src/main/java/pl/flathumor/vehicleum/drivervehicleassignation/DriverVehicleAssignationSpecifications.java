@@ -6,26 +6,32 @@ import org.springframework.data.jpa.domain.Specification;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static pl.flathumor.vehicleum.driver.DriverEntity_.NAME;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.DRIVER;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.FINISH_DATE;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.START_DATE;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.VEHICLE;
 import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.relatedFieldIdIs;
 import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.relatedFieldLike;
+import static pl.flathumor.vehicleum.vehicle.VehicleEntity_.PLATE;
 
 @UtilityClass
 public class DriverVehicleAssignationSpecifications {
 
   public static Specification<DriverVehicleAssignationEntity> driverIs(final UUID driverId) {
-    return relatedFieldIdIs("driver", driverId);
+    return relatedFieldIdIs(DRIVER, driverId);
   }
 
   public static Specification<DriverVehicleAssignationEntity> driverNameLike(final String driverName) {
-    return relatedFieldLike("driver", "name", driverName);
+    return relatedFieldLike(DRIVER, NAME, driverName);
   }
 
   public static Specification<DriverVehicleAssignationEntity> vehicleIs(final UUID vehicleId) {
-    return relatedFieldIdIs("vehicle", vehicleId);
+    return relatedFieldIdIs(VEHICLE, vehicleId);
   }
 
   public static Specification<DriverVehicleAssignationEntity> vehiclePlateLike(final String plate) {
-    return relatedFieldLike("vehicle", "plate", plate);
+    return relatedFieldLike(VEHICLE, PLATE, plate);
   }
 
   public static Specification<DriverVehicleAssignationEntity> assignationPeriodIs(
@@ -34,14 +40,14 @@ public class DriverVehicleAssignationSpecifications {
   ) {
     return (root, query, cb) ->
       cb.or(
-          cb.between(root.get("startDate"), startDate, finishDate),
-          cb.between(root.get("finishDate"), startDate, finishDate));
+          cb.between(root.get(START_DATE), startDate, finishDate),
+          cb.between(root.get(FINISH_DATE), startDate, finishDate));
   }
 
   public static Specification<DriverVehicleAssignationEntity> onDate(final LocalDateTime date) {
     return (root, query, cb) ->
         cb.and(
-            cb.lessThanOrEqualTo(root.get("startDate"), date),
-            cb.greaterThan(root.get("finishDate"), date));
+            cb.lessThanOrEqualTo(root.get(START_DATE), date),
+            cb.greaterThan(root.get(FINISH_DATE), date));
   }
 }

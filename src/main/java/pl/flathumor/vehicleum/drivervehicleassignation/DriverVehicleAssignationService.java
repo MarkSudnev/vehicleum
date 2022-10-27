@@ -15,8 +15,14 @@ import static com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphType.FET
 import static com.cosium.spring.data.jpa.entity.graph.domain.EntityGraphUtils.fromAttributePaths;
 import static org.springframework.data.jpa.domain.Specification.where;
 import static org.springframework.transaction.annotation.Propagation.MANDATORY;
-import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.*;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.DRIVER;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationEntity_.VEHICLE;
 import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.assignationPeriodIs;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.driverIs;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.driverNameLike;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.onDate;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.vehicleIs;
+import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.vehiclePlateLike;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.ACTIVE;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.INACTIVE;
 import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.statusIs;
@@ -34,7 +40,7 @@ public class DriverVehicleAssignationService {
         .findAll(
             where(driverNameLike(search).or(vehiclePlateLike(search))),
             pageable,
-            fromAttributePaths(FETCH, "driver", "vehicle"))
+            fromAttributePaths(FETCH, DRIVER, VEHICLE))
         .map(driverVehicleAssignationMapper::entityToListDto);
 
     return AssignationGridDto.builder()
@@ -49,7 +55,7 @@ public class DriverVehicleAssignationService {
         where(driverIs(driverId)
             .and(onDate(LocalDateTime.now()))
             .and(statusIs(ACTIVE))),
-        fromAttributePaths(FETCH, "driver", "vehicle"));
+        fromAttributePaths(FETCH, DRIVER, VEHICLE));
   }
 
   @Transactional(propagation = MANDATORY)
@@ -58,7 +64,7 @@ public class DriverVehicleAssignationService {
         where(vehicleIs(vehicleId)
             .and(onDate(LocalDateTime.now()))
             .and(statusIs(ACTIVE))),
-        fromAttributePaths(FETCH, "driver", "vehicle"));
+        fromAttributePaths(FETCH, DRIVER, VEHICLE));
   }
 
   @Transactional
