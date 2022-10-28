@@ -1,0 +1,9 @@
+CREATE DATABASE vehicleum;
+
+-- SET SEARCH_PATH TO vehicleum;
+-- SET CLIENT_ENCODING = 'UTF-8';
+-- SET STANDARD_CONFORMING_STRINGS = ON;
+-- SET CLIENT_MIN_MESSAGES = WARNING;
+--
+-- CREATE USER vehicleum_admin;
+-- GRANT ADMIN TO vehicleum_admin;

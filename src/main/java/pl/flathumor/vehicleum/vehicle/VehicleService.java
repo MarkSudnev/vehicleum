@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.flathumor.vehicleum.shared.NoResourceFoundException;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import static org.springframework.data.jpa.domain.Specification.where;

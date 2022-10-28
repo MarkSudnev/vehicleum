@@ -47,8 +47,14 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	annotationProcessor 'org.hibernate:hibernate-jpamodelgen'
+//	annotationProcessor 'lombok-mapstruct-binding'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql:1.17.5'
+	testImplementation 'net.javacrumbs.json-unit:json-unit-assertj:2.36.0'
+	implementation 'net.javacrumbs.json-unit:json-unit-spring:2.36.0'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 dependencyManagement {
