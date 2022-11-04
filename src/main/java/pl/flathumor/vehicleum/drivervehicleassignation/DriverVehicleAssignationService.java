@@ -25,6 +25,7 @@ import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssig
 import static pl.flathumor.vehicleum.drivervehicleassignation.DriverVehicleAssignationSpecifications.vehiclePlateLike;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.ACTIVE;
 import static pl.flathumor.vehicleum.shared.VehicleumEntityStatus.INACTIVE;
+import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.activeEntityIdIs;
 import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.statusIs;
 
 @Service
@@ -84,6 +85,15 @@ public class DriverVehicleAssignationService {
         .orElseThrow(() -> new NoResourceFoundException(DriverVehicleAssignationEntity.class, assignationId));
     assignation.setStatus(INACTIVE);
     assignation.setNote(dto.getNote());
+  }
+
+  @Transactional
+  public void finish(final UUID id, final AssignationFinishDto dto) {
+    final var existingAssignation = driverVehicleAssignationRepository
+        .findOne(where(activeEntityIdIs(id)))
+        .orElseThrow(() -> new NoResourceFoundException(DriverVehicleAssignationEntity.class, id));
+    // TODO: Add some validations
+    existingAssignation.setFinishDate(dto.getFinishDate());
   }
 
   private void checkAvailability(final AssignationCreateDto dto) {
