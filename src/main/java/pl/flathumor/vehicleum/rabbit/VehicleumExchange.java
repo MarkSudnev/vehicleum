@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum VehicleumExchange {
 
-  VEHICLE("vehicle.exchange"),
-  DRIVER("driver.exchange"),
-  ASSIGNATION("assignation.exchange");
+  VEHICLE("vehicle-exchange"),
+  DRIVER("driver-exchange"),
+  ASSIGNATION("assignation-exchange");
 
   private final String name;
 }

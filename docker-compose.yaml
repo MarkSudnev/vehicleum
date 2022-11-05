@@ -13,6 +13,15 @@ services:
       - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
       - vehicleum-database:/var/lib/postgresql/data
 
+  vehicleum-rabbit:
+    image: rabbitmq:3.9-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
 #  tests-keycloak:
 #    image: jboss/keycloak:9.0.3
 #    container_name: "keycloak"
