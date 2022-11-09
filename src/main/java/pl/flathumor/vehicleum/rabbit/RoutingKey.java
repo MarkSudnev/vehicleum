@@ -8,8 +8,9 @@ import lombok.RequiredArgsConstructor;
 public enum RoutingKey {
 
   VEHICLE_REPARATION("vehicle.reparation"),
+  VEHICLE_STATE("vehicle.state"),
   DRIVER_DUTY("driver.duty"),
-  ASSIGNATION("assignation");
+  ASSIGNATION("drier.assignation");
 
   private final String key;
 }

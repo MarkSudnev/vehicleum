@@ -45,4 +45,12 @@ public class VehicleService {
         .orElseThrow(() -> new NoResourceFoundException(VehicleEntity.class.getSimpleName(), vehicleId));
     vehicle.setVehicleState(dto.getState());
   }
+
+  @Transactional
+  public void updateVehicleState(final UUID vehicleId, final VehicleState state) {
+    final var vehicle = vehicleRepository
+        .findOne(where(activeEntityIdIs(vehicleId)))
+        .orElseThrow(() -> new NoResourceFoundException(VehicleEntity.class.getSimpleName(), vehicleId));
+    vehicle.setVehicleState(state);
+  }
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.flathumor.vehicleum.rabbit.VehicleumEventPublisher;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class VehicleController {
 
   private final VehicleService vehicleService;
+  private final VehicleumEventPublisher vehicleumEventPublisher;
 
   @GetMapping
   public VehicleGridDto getPaged(
@@ -39,6 +42,13 @@ public class VehicleController {
       @PathVariable final UUID id,
       @Validated @RequestBody final VehicleUpdateStateDto dto
   ) {
-    vehicleService.updateVehicleState(id, dto);
+    final var event = VehicleStateEvent.builder()
+        .id(UUID.randomUUID())
+//        .timestamp(LocalDateTime.now())
+        .documentId(id)
+        .vehicleState(dto.getState())
+        .build();
+    vehicleumEventPublisher.publish(event);
+//    vehicleService.updateVehicleState(id, dto);
   }
 }
