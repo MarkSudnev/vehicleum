@@ -12,6 +12,8 @@ services:
     volumes:
       - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
       - vehicleum-database:/var/lib/postgresql/data
+    profiles:
+      - pi
 
   vehicleum-rabbit:
     image: rabbitmq:3.9-management-alpine
@@ -21,6 +23,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    profiles:
+      - pi
 
   vehicleum-keycloak:
     image: jboss/keycloak:9.0.3
@@ -32,6 +36,23 @@ services:
       - KEYCLOAK_PASSWORD=admin
     ports:
       - "9091:8080"
+      - "9092:8443"
+
+  vehicleum-keycloak-pi:
+    image: keycloak/keycloak:20.0
+    container_name: "keycloak"
+    volumes:
+      - vehicleum-keycloak:/realms
+    environment:
+      - KEYCLOAK_ADMIN=root
+      - KEYCLOAK_ADMIN_PASSWORD=root
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - "9091:8080"
+      - "9092:8443"
+    profiles:
+      - pi
 
 
 volumes:
