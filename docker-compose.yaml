@@ -22,17 +22,18 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-#  tests-keycloak:
-#    image: jboss/keycloak:9.0.3
-#    container_name: "keycloak"
-#    volumes:
-#      - tests-keycloak:/realms
-#    environment:
-#      - KEYCLOAK_USER=admin
-#      - KEYCLOAK_PASSWORD=admin
-#    ports:
-#      - "9091:8080"
+  vehicleum-keycloak:
+    image: jboss/keycloak:9.0.3
+    container_name: "keycloak"
+    volumes:
+      - vehicleum-keycloak:/realms
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - "9091:8080"
 
 
 volumes:
   vehicleum-database:
+  vehicleum-keycloak:
