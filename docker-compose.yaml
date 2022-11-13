@@ -35,9 +35,10 @@ services:
     ports:
       - "9091:8080"
       - "9092:8443"
+    profiles: ["desk"]
 
   vehicleum-keycloak-pi:
-    image: keycloak/keycloak:20.0
+    image: quay.io/keycloak/keycloak:17.0
     container_name: "keycloak-pi"
     volumes:
       - vehicleum-keycloak:/realms
@@ -49,6 +50,7 @@ services:
     ports:
       - "9091:8080"
       - "9092:8443"
+    command: "start-dev"
     profiles: ["pi"]
 
 
