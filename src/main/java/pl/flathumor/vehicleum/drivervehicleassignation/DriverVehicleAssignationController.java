@@ -23,7 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/driver-vehicle-assignations")
+@RequestMapping("/api/v1/driver-vehicle-assignations")
 public class DriverVehicleAssignationController {
 
   private final DriverVehicleAssignationService driverVehicleAssignationService;

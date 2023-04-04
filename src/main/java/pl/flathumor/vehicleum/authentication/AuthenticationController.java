@@ -19,4 +19,9 @@ public class AuthenticationController {
   public void implicit(@RequestParam("access_token") final String token) {
     log.info("Got token: " + token);
   }
+
+  @GetMapping("/code")
+  public void authorizationCode(@RequestParam("code") final String code) {
+    log.info("Got code: " + code);
+  }
 }

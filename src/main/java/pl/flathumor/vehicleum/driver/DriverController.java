@@ -17,7 +17,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 import static pl.flathumor.vehicleum.shared.VehicleumEntity_.ID;
 
 @RestController
-@RequestMapping("/drivers")
+@RequestMapping("/api/v1/drivers")
 @RequiredArgsConstructor
 public class DriverController {
 
