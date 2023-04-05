@@ -1,0 +1,53 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+
+general:
+  time-zone: UTC
+  local-datetime-format: yyyy-MM-dd'T'HH:mm:ss'Z'
+  local-date-format: yyyy-MM-dd
+
+spring:
+  application:
+    name: vehicleum
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vehicleum
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      default_schema: public
+      format_sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    user: root
+    password: root
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    generator:
+      write-numbers-as-strings: true
+    date-format: ${general.local-datetime-format}
+    time-zone: ${general.time-zone}
+
+rabbit:
+  queue:
+    max-length: 60000
+    overflow: reject-publish
+    lazy-mode: lazy
+    logging:
+      enabled: true
+  message:
+    ttl: 86400000
