@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import pl.flathumor.vehicleum.shared.NoResourceFoundException;
+import pl.flathumor.vehicleum.shared.validation.Exists;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -14,6 +17,7 @@ import static pl.flathumor.vehicleum.shared.VehicleumSpecifications.activeEntity
 import static pl.flathumor.vehicleum.vehicle.VehicleSpecifications.plateLike;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class VehicleService {
 
@@ -39,7 +43,10 @@ public class VehicleService {
   }
 
   @Transactional
-  public void updateVehicleState(final UUID vehicleId, final VehicleUpdateStateDto dto) {
+  public void updateVehicleState(
+      @Exists(entityClass = VehicleEntity.class) final UUID vehicleId,
+      @Valid final VehicleUpdateStateDto dto
+  ) {
     final var vehicle = vehicleRepository
         .findOne(where(activeEntityIdIs(vehicleId)))
         .orElseThrow(() -> new NoResourceFoundException(VehicleEntity.class.getSimpleName(), vehicleId));

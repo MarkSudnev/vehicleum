@@ -22,7 +22,6 @@ import java.util.UUID;
 public class VehicleController {
 
   private final VehicleService vehicleService;
-  private final VehicleumEventPublisher vehicleumEventPublisher;
 
   @GetMapping
   public VehicleGridDto getPaged(
@@ -37,18 +36,11 @@ public class VehicleController {
     return vehicleService.getById(id);
   }
 
-  @PatchMapping("/{id}")
+  @PatchMapping("/{id}/state")
   public void updateVehicleState(
       @PathVariable final UUID id,
-      @Validated @RequestBody final VehicleUpdateStateDto dto
+      @RequestBody final VehicleUpdateStateDto dto
   ) {
-    final var event = VehicleStateEvent.builder()
-        .id(UUID.randomUUID())
-//        .timestamp(LocalDateTime.now())
-        .documentId(id)
-        .vehicleState(dto.getState())
-        .build();
-    vehicleumEventPublisher.publish(event);
-//    vehicleService.updateVehicleState(id, dto);
+    vehicleService.updateVehicleState(id, dto);
   }
 }
