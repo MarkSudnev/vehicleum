@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
     ports:
-      - "5432:5432"
+      - "5430:5432"
     volumes:
       - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql
       - vehicleum-database:/var/lib/postgresql/data
@@ -51,7 +51,7 @@ services:
       - "9091:8080"
       - "9092:8443"
     command: "start-dev"
-    profiles: ["pi"]
+    profiles: ["pi-cloak"]
 
 
 volumes:
